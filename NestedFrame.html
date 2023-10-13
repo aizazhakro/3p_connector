@@ -13,6 +13,7 @@
     const output = document.getElementById("cookies");
     output.innerHTML = `<div>` + document.cookie.split(';').join('<br>') + `</div>`;
   }
+
     
 async function requestStorageAccess() {
   if (!document.hasStorageAccess) {
@@ -67,7 +68,7 @@ async function requestStorageAccess() {
   <h1>Nested Iframe Page</h1>
     <button onclick="writeOuterCookies()">Write Cookies</button> 
     <button onclick="showOuterCookies()">Read Cookies</button>
-    <button onclick="requestStorageAccess()">Request Storage Access </button>
+    <button onclick="async () => { await requestStorageAccess() }">Request Storage Access </button>
     <button id="button2">Request Storage Access 2</button>
     <p id="cookies"></p>
     <div background->
