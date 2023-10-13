@@ -16,7 +16,7 @@ function showCookies() {
 }
 
 
-function requestStorageAccess() {
+function readStorageAccess() {
   if (!document.hasStorageAccess) {
     // This browser doesn't support the Storage Access API
     // so let's just hope we have access!
@@ -80,7 +80,7 @@ function requestStorageAccess() {
 <h1>Telephony Provider</h1>
   <button onclick="writeCookies()">Write Cookies</button> 
   <button onclick="showCookies()">Read Cookies</button>
-  <button onclick="requestStorageAccess()">Request Storage Access </button>
+  <button onclick="readStorageAccess()">Request Storage Access </button>
   <button id="button2">Request Storage Access 2</button>
   <p id="cookies"></p>
 </body>
