@@ -2,7 +2,11 @@
   
 <script>
   function writeCookies() {
-    document.cookie = "name=cookie1; SameSite=None; Secure=true; partitioned=true; Path=/;";
+    document.cookie = "name=validCookie; SameSite=None; Secure=true; partitioned=true; Path=/;";
+    document.cookie = "name=NonSameSite; Secure=true; partitioned=true; Path=/;";
+    document.cookie = "name=NonSecure; SameSite=None; Secure=false; partitioned=true; Path=/;";
+    document.cookie = "name=NonPartitioned; SameSite=None; Secure=true; partitioned=false; Path=/;";
+    document.cookie = "name=PartitionWithoutPath; SameSite=None; Secure=true; partitioned=true;";
     document.cookie = "siteDomain=aizazhakro.github.io; SameSite=None; Secure";
   }
 
