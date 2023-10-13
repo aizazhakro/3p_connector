@@ -1,1 +1,18 @@
+<html>
+  
+<script>
+  document.cookie = "name=oeschger; SameSite=None; Secure";
+document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+
+function showCookies() {
+  const output = document.getElementById("cookies");
+  output.textContent = `> ${document.cookie}`;
+}
+</script>
+  
+<body>
 <h1>Hello World</h1>
+  <button onclick="showCookies()">Show Cookies</button>
+  <p id="cookies"></p>
+</body>
+</html>
