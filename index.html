@@ -12,7 +12,7 @@
 
 function showCookies() {
   const output = document.getElementById("cookies");
-  output.textConent = document.cookie.split(';').join('\n');
+  output.innerHTML = `<div>' + document.cookie.split(';').join('<br>') + '</div>';
 }
 </script>
   
