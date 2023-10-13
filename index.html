@@ -2,8 +2,8 @@
   
 <script>
   function writeCookies() {
-    document.cookie = "name=oeschger; SameSite=None; Secure";
-    document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+    document.cookie = "name=cookie1; SameSite=None; Secure=true; partitioned=true";
+    document.cookie = "siteDomain=`${window.origin}`; SameSite=None; Secure";
   }
 
 function showCookies() {
