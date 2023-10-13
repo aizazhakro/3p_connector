@@ -14,63 +14,62 @@
     output.innerHTML = `<div>` + document.cookie.split(';').join('<br>') + `</div>`;
   }
 
-async function requestStorageAccess() {
-  if (!document.hasStorageAccess) {
-    // This browser doesn't support the Storage Access API
-    // so let's just hope we have access!
-    showOuterCookies();
-  } else {
-    const hasAccess = await document.hasStorageAccess();
-    if (hasAccess) {
-      // We have access to unpartitioned cookies, so let's go
+      
+  function requestStorageAccess() {
+    if (!document.hasStorageAccess) {
+      // This browser doesn't support the Storage Access API
+      // so let's just hope we have access!
       showOuterCookies();
     } else {
-      // Check whether unpartitioned cookie access has been granted
-      // to another same-site embed
-      try {
-        const permission = await navigator.permissions.query({
-          name: "storage-access",
-        });
-
-        if (permission.state === "granted") {
-          // If so, you can just call requestStorageAccess() without a user interaction,
-          // and it will resolve automatically.
-          await document.requestStorageAccess();
+      document.hasStorageAccess().then((hasAccess) => {
+        if (hasAccess) {
+          // We have access to unpartitioned cookies, so let's go
           showOuterCookies();
-        } else if (permission.state === "prompt") {
-          // Need to call requestStorageAccess() after a user interaction
-          document.getElementById("button2").addEventListener("click", async () => {
-            try {
-              await document.requestStorageAccess();
-              showOuterCookies();
-            } catch (err) {
-              // If there is an error obtaining storage access.
-              console.error(`Error obtaining storage access: ${err}.
-                            Please sign in.`);
+        } else {
+          // Check whether unpartitioned cookie access has been granted
+          // to another same-site embed
+          navigator.permissions.query({
+            name: "storage-access",
+          }).then((permission) => {
+            if (permission.state === "granted") {
+              // If so, you can just call requestStorageAccess() without a user interaction,
+              // and it will resolve automatically.
+              document.requestStorageAccess().then(() => {
+                showOuterCookies();
+              });
+            } else if (permission.state === "prompt") {
+              // Need to call requestStorageAccess() after a user interaction
+              document.getElementById("button2").addEventListener("click", () => {
+                try {
+                  document.requestStorageAccess().then(() => {
+                    showOuterCookies();
+                  });
+                } catch (err) {
+                  // If there is an error obtaining storage access.
+                  console.error(`Error obtaining storage access: ${err}.
+                                    Please sign in.`);
+                }
+              });
+            } else if (permission.state === "denied") {
+              // User has denied unpartitioned cookie access, so we'll
+              // need to do something else
             }
+          }).catch((error) => {
+            console.log(`Could not access permission state. Error: ${error}`);
+            showOuterCookies(); // Again, we'll have to hope we have access!});
           });
-        } else if (permission.state === "denied") {
-          // User has denied unpartitioned cookie access, so we'll
-          // need to do something else
         }
-      } catch (error) {
-        console.log(`Could not access permission state. Error: ${error}`);
-        showOuterCookies(); // Again, we'll have to hope we have access!
-      }
+      });
     }
   }
-}
 
-function sync_request_storage_access() {
-  setTimeout(() => { await requestStorageAccess(); },0);
-}
   </script>
     
   <body>
   <h1>Nested Iframe Page</h1>
     <button onclick="writeOuterCookies()">Write Cookies</button> 
     <button onclick="showOuterCookies()">Read Cookies</button>
-    <button onclick="async () => { await requestStorageAccess() }">Request Storage Access </button>
+    <button onclick="requestStorageAccess()">Request Storage Access </button>
     <button id="button2">Request Storage Access 2</button>
     <p id="cookies"></p>
     <div background->
