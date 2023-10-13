@@ -14,12 +14,24 @@ function showCookies() {
   const output = document.getElementById("cookies");
   output.innerHTML = `<div>` + document.cookie.split(';').join('<br>') + `</div>`;
 }
+
+  function requestStorageAccess() {
+    document.requestStorageAccess().then(
+      () => {
+        console.log("access granted");
+        alert("access granted");
+      },
+      () => {
+        console.log("access denied");
+        alert("access denied");
+      };
 </script>
   
 <body>
 <h1>Hello World</h1>
   <button onclick="writeCookies()">Write Cookies</button> 
   <button onclick="showCookies()">Read Cookies</button>
+  <button onclick="requestStorageAccess()">Request Storage Access </button>
   <p id="cookies"></p>
 </body>
 </html>
