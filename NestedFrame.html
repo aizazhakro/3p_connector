@@ -1,6 +1,6 @@
 <html>
   <script>
-    function writeCookies() {
+    function writeOuterCookies() {
       document.cookie = "cookie1=validCookie; SameSite=None; Secure=true; partitioned=true; Path=/;";
       document.cookie = "cookie2=NonSameSite; Secure=true; partitioned=true; Path=/;";
       document.cookie = "cookie3=NonSecure; SameSite=None; Secure=false; partitioned=true; Path=/;";
@@ -9,7 +9,7 @@
       document.cookie = "siteDomain=aizazhakro.github.io; SameSite=None; Secure";
     }
   
-  function showCookies() {
+  function showOuterCookies() {
     const output = document.getElementById("cookies");
     output.innerHTML = `<div>` + document.cookie.split(';').join('<br>') + `</div>`;
   }
@@ -17,8 +17,8 @@
     
   <body>
   <h1>Nested Iframe Page</h1>
-    <button onclick="writeCookies()">Write Cookies</button> 
-    <button onclick="showCookies()">Read Cookies</button>
+    <button onclick="writeOuterCookies()">Write Cookies</button> 
+    <button onclick="showOuterCookies()">Read Cookies</button>
     <p id="cookies"></p>
     <div background->
       <iframe src="https://aizazhakro.github.io/3p_connector/" sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin" style="width: 100%; height:100%; border-style: 'dotted'; border-color:red;"></iframe>
