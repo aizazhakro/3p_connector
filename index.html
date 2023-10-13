@@ -15,17 +15,52 @@ function showCookies() {
   output.innerHTML = `<div>` + document.cookie.split(';').join('<br>') + `</div>`;
 }
 
-  function requestStorageAccess() {
-    document.requestStorageAccess().then(
-      () => {
-        console.log("access granted");
-        alert("access granted");
-      },
-      () => {
-        console.log("access denied");
-        alert("access denied");
-      });
+async function requestStorageAccess() {
+  if (!document.hasStorageAccess) {
+    // This browser doesn't support the Storage Access API
+    // so let's just hope we have access!
+    showCookies();
+  } else {
+    const hasAccess = await document.hasStorageAccess();
+    if (hasAccess) {
+      // We have access to unpartitioned cookies, so let's go
+      showCookies();
+    } else {
+      // Check whether unpartitioned cookie access has been granted
+      // to another same-site embed
+      try {
+        const permission = await navigator.permissions.query({
+          name: "storage-access",
+        });
+
+        if (permission.state === "granted") {
+          // If so, you can just call requestStorageAccess() without a user interaction,
+          // and it will resolve automatically.
+          await document.requestStorageAccess();
+          showCookies();
+        } else if (permission.state === "prompt") {
+          // Need to call requestStorageAccess() after a user interaction
+          document.getElementById("button2").addEventListener("click", async () => {
+            try {
+              await document.requestStorageAccess();
+              showCookies();
+            } catch (err) {
+              // If there is an error obtaining storage access.
+              console.error(`Error obtaining storage access: ${err}.
+                            Please sign in.`);
+            }
+          });
+        } else if (permission.state === "denied") {
+          // User has denied unpartitioned cookie access, so we'll
+          // need to do something else
+        }
+      } catch (error) {
+        console.log(`Could not access permission state. Error: ${error}`);
+        showCookies(); // Again, we'll have to hope we have access!
+      }
+    }
   }
+}
 </script>
   
 <body>
@@ -33,6 +68,7 @@ function showCookies() {
   <button onclick="writeCookies()">Write Cookies</button> 
   <button onclick="showCookies()">Read Cookies</button>
   <button onclick="requestStorageAccess()">Request Storage Access </button>
+  <button id="button2">Request Storage Access 2</button>
   <p id="cookies"></p>
 </body>
 </html>
