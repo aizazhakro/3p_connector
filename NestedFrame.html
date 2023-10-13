@@ -48,15 +48,14 @@
               document.getElementById("button2").addEventListener("click", () => {
                 try {
                   document.requestStorageAccess().then(() => {
-                    console.log('requestStorageAccess failed after granting', ex);
+                    console.log('requestStorageAccess allowed, Button click is reading cookies');
                     showOuterCookies();
                   }).catch((ex) => {
                     console.error('requestStorageAccess failed after prompting', ex);
                   });
                 } catch (err) {
                   // If there is an error obtaining storage access.
-                  console.error(`Error obtaining storage access: ${err}.
-                                    Please sign in.`);
+                  console.error(`Error obtaining storage access: ${err}. Please sign in.`);
                 }
               });
             } else if (permission.state === "denied") {
