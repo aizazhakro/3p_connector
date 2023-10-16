@@ -49,7 +49,7 @@ function readStorageAccess() {
             document.getElementById("button2").addEventListener("click", () => {
               try {
                 document.requestStorageAccess().then(() => {
-                  console.log('requestStorageAccess failed after granting', ex);
+                  console.log('requestStorageAccess succeed after granting');
                   showOuterCookies();
                 }).catch((ex) => {
                   console.error('requestStorageAccess failed after prompting', ex);
