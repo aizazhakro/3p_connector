@@ -1,0 +1,82 @@
+<html>
+  
+<script>
+  function writeCookies() {
+    document.cookie = "Unpartitioned cookie=aizazhakro.github.io; SameSite=None; Secure";
+  }
+
+function showOuterCookies() {
+  const output = document.getElementById("cookies");
+  output.innerHTML = `<div>` + document.cookie.split(';').join('<br>') + `</div>`;
+}
+
+
+function readStorageAccess() {
+  if (!document.hasStorageAccess) {
+    // This browser doesn't support the Storage Access API
+    // so let's just hope we have access!
+    console.log('No storage access');
+    showOuterCookies();
+  } else {
+    document.hasStorageAccess().then((hasAccess) => {
+      if (hasAccess) {
+        // We have access to unpartitioned cookies, so let's go
+        console.log('Has storage access, showing cookies');
+        showOuterCookies();
+      } else {
+        // Check whether unpartitioned cookie access has been granted
+        // to another same-site embed
+        navigator.permissions.query({
+          name: "storage-access",
+        }).then((permission) => {
+          console.log('No storage access, got permission', permission);
+          if (permission.state === "granted") {
+            // If so, you can just call requestStorageAccess() without a user interaction,
+            // and it will resolve automatically.
+            document.requestStorageAccess().then(() => {
+              console.log('requestStorageAccess passed after granting. Writing cookies');
+              showOuterCookies();
+            }).catch((ex) => {
+              console.error('requestStorageAccess failed after granting', ex);
+            });
+          } else if (permission.state === "prompt") {
+            // Need to call requestStorageAccess() after a user interaction
+            document.getElementById("button2").addEventListener("click", () => {
+              try {
+                document.requestStorageAccess().then(() => {
+                  console.log('requestStorageAccess succeed after granting');
+                  showOuterCookies();
+                }).catch((ex) => {
+                  console.error('requestStorageAccess failed after prompting', ex);
+                });
+              } catch (err) {
+                // If there is an error obtaining storage access.
+                console.error(`Error obtaining storage access: ${err}.
+                                  Please sign in.`);
+              }
+            });
+          } else if (permission.state === "denied") {
+            // User has denied unpartitioned cookie access, so we'll
+            // need to do something else
+            console.error('requestStorageAccess permission denied');
+          }
+        }).catch((error) => {
+          console.log(`Could not access permission state. Error: ${error}`);
+          showOuterCookies(); // Again, we'll have to hope we have access!});
+        });
+      }
+    });
+  }
+}
+
+</script>
+  
+<body>
+<h1>Telephony Provider</h1>
+  <button onclick="writeCookies()">Write Cookies</button> 
+  <button onclick="showOuterCookies()">Read Cookies</button>
+  <button onclick="readStorageAccess()">Request Storage Access </button>
+  <button id="button2">Request Storage Access 2</button>
+  <p id="cookies"></p>
+</body>
+</html>
