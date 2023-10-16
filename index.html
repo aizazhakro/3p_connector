@@ -10,7 +10,7 @@
     document.cookie = "cookie6=aizazhakro.github.io; SameSite=None; Secure";
   }
 
-function showCookies() {
+function showOuterCookies() {
   const output = document.getElementById("cookies");
   output.innerHTML = `<div>` + document.cookie.split(';').join('<br>') + `</div>`;
 }
