@@ -1,0 +1,18 @@
+<html>
+<head>
+	<script type="text/javascript">
+		function registerInteraction() {
+			if(window.opener) {
+			  const customEvent = new CustomEvent('custom', { detail: {} });
+			  window.opener.dispatchEvent(customEvent);
+			  window.close();
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>Welcome to the top level page</h1>
+	<h4>Please click the button below to register your interaction with Google Chrome</h4>
+	<button onclick="registerInteraction()">Click Me</button>
+</body>
+</html>
