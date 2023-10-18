@@ -1,0 +1,316 @@
+<html>
+  <head>
+     <script src="https://login.salesforce.com/support/api/55.0/lightning/opencti.js"></script>
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+     <script type="text/javascript">
+
+      // Callback of API method: setSoftphonePanelHeight
+      var setSoftphonePanelHeightCallback = function(response) {
+            // Returns true if setSoftphonePanelHeight method is executed successfully, false otherwise
+            if (response.success) {
+               alert('setSoftphonePanelHeight is successfully executed.');
+            } 
+            else {
+               alert('setSoftphonePanelHeight failed.');
+            }
+      };
+      // Invokes API method: setSoftphonePanelHeight
+      function setSoftphonePanelHeight() {
+         sforce.opencti.setSoftphonePanelHeight({
+            heightPX: 500,
+            callback: setSoftphonePanelHeightCallback
+         });
+      }
+      // Callback of API method: setSoftphonePanelWidth
+      var setSoftphonePanelWidthCallback = function(response) {
+            // Returns true if setSoftphonePanelWidth method is executed successfully, false otherwise
+            if (response.success) {
+               alert('setSoftphonePanelWidth is successfully executed.');
+            } 
+            else {
+               alert('setSoftphonePanelWidth failed.');
+            }
+      };
+      // Invokes API method: setSoftphonePanelWidth
+      function setSoftphonePanelWidth() {
+         sforce.opencti.setSoftphonePanelWidth({
+            widthPX: 500,
+            callback: setSoftphonePanelHeightCallback
+         });
+      }
+      // Callback of API method: setSoftphoneItemIcon
+      var setSoftphoneItemIconCallback = function(response) {
+            // Returns true if setSoftphoneItemIcon method is executed successfully, false otherwise
+            if (response.success) {
+               alert('setSoftphoneItemIcon is successfully executed.');
+            } 
+            else {
+               alert('setSoftphoneItemIcon failed.');
+            }
+      };
+      // Invokes API method: setSoftphoneItemIcon
+      function setSoftphoneItemIcon() {
+         sforce.opencti.setSoftphoneItemIcon({
+            key: 'call',
+            callback: setSoftphoneItemIconCallback
+         });
+      }
+      // Callback of API method: setSoftphoneItemLabel
+      var setSoftphoneItemLabelCallback = function(response) {
+            // Returns true if setSoftphoneItemLabel method is executed successfully, false otherwise
+            if (response.success) {
+               alert('setSoftphoneItemLabel is successfully executed.');
+            } 
+            else {
+               alert('setSoftphoneItemLabel failed.');
+            }
+      };
+      // Invokes API method: setSoftphoneItemLabel
+      function setSoftphoneItemLabel() {
+         sforce.opencti.setSoftphoneItemLabel({
+            Label: 'MySoftphone',
+            callback: setSoftphoneItemLabelCallback
+         });
+      }
+      var callback = function(response) {
+         if (response.success) {
+            console.log('API method call executed successfully! returnValue:', response.returnValue);
+         } else { 
+            console.error('Something went wrong! Errors:', response.errors);
+         } 
+      };
+
+      function enableClickToDial() {
+          sforce.opencti.enableClickToDial({callback: callback});
+      }
+      function disableClickToDial() {
+          sforce.opencti.disableClickToDial({callback: callback});
+      }
+      var callbackAppViewInfo = function(response) {
+         if (response.success) {
+            console.log('API method call executed successfully! returnValue:', response.returnValue);
+         } else { 
+            console.error('Something went wrong! Errors:', response.errors);
+         } 
+      };
+      function getAppViewInfo() {
+          sforce.opencti.getAppViewInfo({callback: callbackAppViewInfo});
+      }
+      var callbackCallCenterSettings = function(response) {
+         if (response.success) {
+            console.log('API method call executed successfully! returnValue:', response.returnValue);
+         } else { 
+            console.error('Something went wrong! Errors:', response.errors);
+         } 
+      };
+
+      function getCallCenterSettings() {
+          sforce.opencti.getCallCenterSettings({callback: callbackCallCenterSettings});
+      }
+      var callbackSoftPhoneLabel = function(response) {
+         if (response.success) {
+            console.log('API method call executed successfully! returnValue:', response.returnValue);
+         } else { 
+            console.error('Something went wrong! Errors:', response.errors);
+         }
+      };
+
+      function setSoftphoneItemLabel() {
+          sforce.opencti.setSoftphoneItemLabel({label: "MySoftphone", callback: callbackSoftPhoneLabel});
+      }
+      var runApexCallback = function(response) {
+         if (response.success) {
+            console.log('API method call executed successfully! returnValue:', response.returnValue);
+         } else { 
+            console.error('Something went wrong! Errors:', response.errors);
+         }
+      };
+       function runApex() {
+          var param = {apexClass: 'AccountRetrieval', methodName: 'getAccount', methodParams: 'name=acme'};
+          param.callback = runApexCallback;
+          //Invokes API method
+          sforce.opencti.runApex(param);
+       }
+       
+       var callbacksearchAndScreenPop = function(response) {
+         if (response.success) {
+            console.log('API method call executed successfully! returnValue:', response.returnValue);
+         } else { 
+            console.error('Something went wrong! Errors:', response.errors);
+         }
+        };
+       function searchAndScreenPop() {
+            //Invokes API method
+            sforce.opencti.searchAndScreenPop({ searchParams : 'Acme',queryParams : 'Key1=value1&Key2=value2', callType : sforce.opencti.CALL_TYPE.INBOUND,  deferred: false, callback : callbacksearchAndScreenPop });
+        };
+        
+        function onWindowLoaded() {
+            sforce.opencti.onNavigationChange({
+                listener: function(payload) {
+                    console.log('openctidebug [CONNECTOR] openctidebug: onNavigationChange');
+                    console.log(payload);
+                }
+            });
+            
+            sforce.opencti.enableClickToDial({ callback: function() {
+                console.log('click2Dial enabled on load');
+        
+                sforce.opencti.onClickToDial({
+                    listener : function(payload) {
+                        alert('onClickToDial');
+                        console.log('openctidebug onClickToDial');
+                        console.log(payload);
+                    }
+                });
+            }
+        });
+         
+        };
+        
+        
+        
+        
+        window.addEventListener('load', onWindowLoaded);
+
+
+ function writeCookies() {
+    document.cookie = "Unpartitioned cookie=aizazhakro.github.io; SameSite=None; Secure";
+  }
+
+ function showOuterCookies() {
+  const output = document.getElementById("cookies");
+  if (document.cookie) {
+    output.innerHTML = document.cookie; //`<div>` + document.cookie.split(';').join('<br>') + `</div>`;
+  } else {
+    output.innerHTML = 'Nothing to read'
+  }
+}
+
+function writeToApiOutput(text) {
+  console.log(text);
+  document.getElementById('api-output').textContent = text;
+
+}
+
+
+ function readStorageAccess() {
+  if (!document.hasStorageAccess) {
+    // This browser doesn't support the Storage Access API
+    // so let's just hope we have access!
+    writeToApiOutput('No storage access');
+    showOuterCookies();
+  } else {
+    document.hasStorageAccess().then((hasAccess) => {
+      if (hasAccess) {
+        // We have access to unpartitioned cookies, so let's go
+        writeToApiOutput('Has storage access, showing cookies');
+        showOuterCookies();
+      } else {
+        // Check whether unpartitioned cookie access has been granted
+        // to another same-site embed
+        navigator.permissions.query({
+          name: "storage-access",
+        }).then((permission) => {
+          writeToApiOutput('No storage access, got permission', permission);
+          if (permission.state === "granted") {
+            // If so, you can just call requestStorageAccess() without a user interaction,
+            // and it will resolve automatically.
+            document.requestStorageAccess().then(() => {
+              writeToApiOutput('requestStorageAccess passed after granting. Writing cookies');
+              showOuterCookies();
+            }).catch((ex) => {
+              writeToApiOutput('requestStorageAccess failed after granting', ex);
+            });
+          } else if (permission.state === "prompt") {
+            // Need to call requestStorageAccess() after a user interaction
+            document.getElementById("button2").disabled = false;
+            document.getElementById("button2").addEventListener("click", () => {
+              try {
+                document.requestStorageAccess().then(() => {
+                  writeToApiOutput('requestStorageAccess succeed after granting');
+                  showOuterCookies();
+                }).catch((ex) => {
+                  writeToApiOutput('requestStorageAccess failed after prompting', ex);
+                });
+              } catch (err) {
+                // If there is an error obtaining storage access.
+                writeToApiOutput(`Error obtaining storage access: ${err}.
+                                  Please sign in.`);
+              }
+            });
+          } else if (permission.state === "denied") {
+            // User has denied unpartitioned cookie access, so we'll
+            // need to do something else
+            writeToApiOutput('requestStorageAccess permission denied');
+          }
+        }).catch((error) => {
+          writeToApiOutput(`Could not access permission state. Error: ${error}`);
+          showOuterCookies(); // Again, we'll have to hope we have access!});
+        });
+      }
+    });
+  }
+}
+
+function interactWithTopLevelWebsite() {
+  let width = 400;
+  let height = 400;
+  let left = (screen.width/2) - (width/2);
+  let top = (screen.height/2) - (height/2);
+  const features = `left=${left},top=${top},width=${width},height=${height}`;
+  writeToApiOutput("opened top-level page. Waiting for user gesture to trigger close ");
+  window.open("/top_level_page.html", "Top Level Page", features);
+  window.addEventListener('custom' , () => { writeToApiOutput('top level window closed'); });
+  //await new Promise(resolve => window.addEventListener('custom', resolve));
+}
+   </script>     
+   </head>
+  
+<body>
+
+
+<div class="card text-center">
+  <div class="card-header">
+    Storage Access OpenCTI Adapter
+  </div>
+  <div class="card-body">
+    <!-- <h5 class="card-title"></h5>/ -->
+    <!-- <p class="card-text">Access Cookies Below</p> -->
+    <div class="btn-group btn-group-justified" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-outline-primary" onclick="writeCookies()">Write Cookie</button>
+      <button type="button" class="btn btn-outline-primary" onclick="showOuterCookies()">Read Cookie</button>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <code><p id="cookies"> ......... </p></code>
+      </div>
+    </div>
+    <hr/>
+    <p class="card-text">Storage Access API Tester</p>
+    <div class="btn-group-vertical" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-outline-primary" onclick="readStorageAccess()">Read Storage Access </button>
+      <button type="button" class="btn btn-outline-primary" id="button2" >Request Storage Access</button>
+      <button type="button" class="btn btn-outline-primary" onclick="interactWithTopLevelWebsite()">Interact With Top Level Site </button>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <code><p id="api-output"> ...  </p></code>
+      </div>
+    </div>
+    
+  </div>
+  <div class="card-footer text-muted">
+    Demo Purpose Only
+  </div>
+</div>
+</body>
+</html>
