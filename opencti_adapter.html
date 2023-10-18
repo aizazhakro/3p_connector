@@ -267,7 +267,7 @@ function interactWithTopLevelWebsite() {
   let top = (screen.height/2) - (height/2);
   const features = `left=${left},top=${top},width=${width},height=${height}`;
   writeToApiOutput("opened top-level page. Waiting for user gesture to trigger close ");
-  window.open("/top_level_page.html", "Top Level Page", features);
+  window.open("https://aizazhakro.github.io/3p_connector/top_level_page.html", "Top Level Page", features);
   window.addEventListener('custom' , () => { writeToApiOutput('top level window closed'); });
   //await new Promise(resolve => window.addEventListener('custom', resolve));
 }
