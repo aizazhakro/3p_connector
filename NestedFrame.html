@@ -46,6 +46,8 @@
             } else if (permission.state === "prompt") {
               // Need to call requestStorageAccess() after a user interaction
               document.getElementById("button2").disabled = false;
+              // Show a popup making the user navigate to the url
+              window.open('https://aizazhakro.github.io/3p_connector');
               document.getElementById("button2").addEventListener("click", () => {
                 try {
                   document.requestStorageAccess().then(() => {
