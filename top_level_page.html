@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 	<script type="text/javascript">
+		// function to return custom event on button click and close the window
 		function registerInteraction() {
 			if(window.opener) {
 			  const customEvent = new CustomEvent('custom', { detail: {} });
@@ -26,7 +27,7 @@
   <hr class="my-4">
   <p class="lead">
     <div class="btn-group btn-group-justified" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-outline-primary" onclick="registerInteraction()">Click here to close this window</button>
+	    <button type="button" class="btn btn-outline-primary" onclick="registerInteraction()">Click here to register your interaction and close this window</button>
   </div>
   </p>
 </div>
