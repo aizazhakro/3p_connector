@@ -101,7 +101,6 @@ function readStorageAccess() {
           else if (permission.state === "prompt") {
             // Need to call requestStorageAccess() after a user interaction
             document.getElementById("requestStorageAccess").disabled = false;
-            document.getElementById("interactWithTopLevelWebsite").disabled -= false;
             document.getElementById("requestStorageAccess").addEventListener("click", () => {
               try {
                 document.requestStorageAccess().then(() => {
@@ -133,7 +132,7 @@ function readStorageAccess() {
 }
 
 function interactWithTopLevelWebsite() {
-  const width = 400;
+  const width = 800;
   const height = 400;
   const left = (screen.width / 2) - (width / 2);
   const top = (screen.height / 2) - (height / 2);
@@ -167,7 +166,7 @@ function interactWithTopLevelWebsite() {
           <div class="btn-group-vertical" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-outline-primary" onclick="readStorageAccess()">Read Storage Access </button>
             <button type="button" class="btn btn-outline-primary" id="requestStorageAccess" disabled>Request Storage Access</button>
-            <button type="button" class="btn btn-outline-primary" id="interactWithTopLevelWebsite" disabled onclick="interactWithTopLevelWebsite()">Interact With Top Level Site </button>
+            <button type="button" class="btn btn-outline-primary" id="interactWithTopLevelWebsite" onclick="interactWithTopLevelWebsite()">Interact With Top Level Site </button>
           </div>
           <hr/>
           <div class="card">
